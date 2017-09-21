@@ -14,28 +14,31 @@ apply plugin: 'com.google.protobuf'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
-        minSdkVersion 21
+        applicationId 'com.google.android.apps.nexuslauncher'
+
+        minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
         versionName "2.1"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         debug {
             minifyEnabled false
         }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
     }
 
     productFlavors {
-        aosp {
-            applicationId 'com.google.android.apps.nexuslauncher'
-            testApplicationId 'com.android.launcher3.tests'
-        }
+        aosp {}
     }
+
     sourceSets {
         main {
             res.srcDirs = ['res']
@@ -43,19 +46,8 @@ android {
             manifest.srcFile 'AndroidManifest-common.xml'
             proto.srcDirs 'protos/'
         }
-
-        androidTest {
-            java.srcDirs = ['tests/src']
-            res.srcDirs = ['tests/res']
-            manifest.srcFile "tests/AndroidManifest-common.xml"
-        }
-
         aosp {
             manifest.srcFile "AndroidManifest.xml"
-        }
-
-        aospAndroidTest {
-            manifest.srcFile "tests/AndroidManifest.xml"
         }
     }
 }
@@ -67,18 +59,10 @@ repositories {
 
 final String SUPPORT_LIBS_VERSION = '26.+'
 dependencies {
-    compile "com.android.support:support-v4:${SUPPORT_LIBS_VERSION}"
+    compile "com.android.support:support-annotations:${SUPPORT_LIBS_VERSION}"
     compile "com.android.support:recyclerview-v7:${SUPPORT_LIBS_VERSION}"
     compile "com.android.support:palette-v7:${SUPPORT_LIBS_VERSION}"
     compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-2'
-
-    testCompile 'junit:junit:4.12'
-    androidTestCompile "org.mockito:mockito-core:1.+"
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-    androidTestCompile "com.android.support:support-annotations:${SUPPORT_LIBS_VERSION}"
 }
 
 protobuf {

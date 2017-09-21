@@ -37,8 +37,6 @@ import com.android.launcher3.R;
 public class AllAppsRecyclerViewContainerView extends RelativeLayout
         implements BubbleTextShadowHandler {
 
-    private final ClickShadowView mTouchFeedbackView;
-
     public AllAppsRecyclerViewContainerView(Context context) {
         this(context, null);
     }
@@ -52,23 +50,17 @@ public class AllAppsRecyclerViewContainerView extends RelativeLayout
 
         Launcher launcher = Launcher.getLauncher(context);
         DeviceProfile grid = launcher.getDeviceProfile();
-
-        mTouchFeedbackView = new ClickShadowView(context);
-
-        // Make the feedback view large enough to hold the blur bitmap.
-        int size = grid.allAppsIconSizePx + mTouchFeedbackView.getExtraSize();
-        addView(mTouchFeedbackView, size, size);
     }
 
     @Override
     public void setPressedIcon(BubbleTextView icon, Bitmap background) {
-        if (icon == null || background == null) {
-            mTouchFeedbackView.setBitmap(null);
-            mTouchFeedbackView.animate().cancel();
-        } else if (mTouchFeedbackView.setBitmap(background)) {
-            View rv = findViewById(R.id.apps_list_view);
-            mTouchFeedbackView.alignWithIconView(icon, (ViewGroup) icon.getParent(), rv);
-            mTouchFeedbackView.animateShadow();
-        }
+//        if (icon == null || background == null) {
+//            mTouchFeedbackView.setBitmap(null);
+//            mTouchFeedbackView.animate().cancel();
+//        } else if (mTouchFeedbackView.setBitmap(background)) {
+//            View rv = findViewById(R.id.apps_list_view);
+//            mTouchFeedbackView.alignWithIconView(icon, (ViewGroup) icon.getParent(), rv);
+//            mTouchFeedbackView.animateShadow();
+//        }
     }
 }

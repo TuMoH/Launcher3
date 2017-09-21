@@ -31,7 +31,7 @@ public class SuperGContainerView extends Qsb
     {
         super(paramContext, paramAttributeSet, paramInt);
         if (mLauncher.useVerticalBarLayout()) {
-            View.inflate(paramContext, R.layout.qsb_blocker_view, this);
+//            View.inflate(paramContext, R.layout.qsb_blocker_view, this);
             this.mTouchDelegate = null;
         }
         else {
@@ -63,13 +63,13 @@ public class SuperGContainerView extends Qsb
         super.setPadding(0, 0, 0, 0);
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (mTouchDelegate != null) {
-            mLauncher.getWorkspace().findViewById(R.id.workspace_blocked_row).setTouchDelegate(mTouchDelegate);
-        }
-    }
+//    @Override
+//    protected void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        if (mTouchDelegate != null) {
+//            mLauncher.getWorkspace().findViewById(R.id.workspace_blocked_row).setTouchDelegate(mTouchDelegate);
+//        }
+//    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

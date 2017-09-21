@@ -130,8 +130,6 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
     private int mDragOutlineCurrent = 0;
     private final Paint mDragOutlinePaint = new Paint();
 
-    private final ClickShadowView mTouchFeedbackView;
-
     @Thunk HashMap<CellLayout.LayoutParams, Animator> mReorderAnimators = new HashMap<>();
     @Thunk HashMap<View, ReorderPreviewAnimation> mShakeAnimators = new HashMap<>();
 
@@ -290,8 +288,6 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
 
         mStylusEventHelper = new StylusEventHelper(new SimpleOnStylusPressListener(this), this);
 
-        mTouchFeedbackView = new ClickShadowView(context);
-        addView(mTouchFeedbackView);
         addView(mShortcutsAndWidgets);
     }
 
@@ -394,16 +390,16 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
 
     @Override
     public void setPressedIcon(BubbleTextView icon, Bitmap background) {
-        if (icon == null || background == null) {
-            mTouchFeedbackView.setBitmap(null);
-            mTouchFeedbackView.animate().cancel();
-        } else {
-            if (mTouchFeedbackView.setBitmap(background)) {
-                mTouchFeedbackView.alignWithIconView(icon, mShortcutsAndWidgets,
-                        null /* clipAgainstView */);
-                mTouchFeedbackView.animateShadow();
-            }
-        }
+//        if (icon == null || background == null) {
+//            mTouchFeedbackView.setBitmap(null);
+//            mTouchFeedbackView.animate().cancel();
+//        } else {
+//            if (mTouchFeedbackView.setBitmap(background)) {
+//                mTouchFeedbackView.alignWithIconView(icon, mShortcutsAndWidgets,
+//                        null /* clipAgainstView */);
+//                mTouchFeedbackView.animateShadow();
+//            }
+//        }
     }
 
     void disableDragTarget() {
@@ -822,11 +818,11 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
         }
 
         // Make the feedback view large enough to hold the blur bitmap.
-        mTouchFeedbackView.measure(
-                MeasureSpec.makeMeasureSpec(mCellWidth + mTouchFeedbackView.getExtraSize(),
-                        MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(mCellHeight + mTouchFeedbackView.getExtraSize(),
-                        MeasureSpec.EXACTLY));
+//        mTouchFeedbackView.measure(
+//                MeasureSpec.makeMeasureSpec(mCellWidth + mTouchFeedbackView.getExtraSize(),
+//                        MeasureSpec.EXACTLY),
+//                MeasureSpec.makeMeasureSpec(mCellHeight + mTouchFeedbackView.getExtraSize(),
+//                        MeasureSpec.EXACTLY));
 
         mShortcutsAndWidgets.measure(
                 MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY),
@@ -857,9 +853,9 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
         int top = getPaddingTop();
         int bottom = b - t - getPaddingBottom();
 
-        mTouchFeedbackView.layout(left, top,
-                left + mTouchFeedbackView.getMeasuredWidth(),
-                top + mTouchFeedbackView.getMeasuredHeight());
+//        mTouchFeedbackView.layout(left, top,
+//                left + mTouchFeedbackView.getMeasuredWidth(),
+//                top + mTouchFeedbackView.getMeasuredHeight());
         mShortcutsAndWidgets.layout(left, top, right, bottom);
 
         // Expand the background drawing bounds by the padding baked into the background drawable

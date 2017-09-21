@@ -219,7 +219,6 @@ public class Launcher extends BaseActivity
     private View mLauncherView;
     @Thunk DragLayer mDragLayer;
     private DragController mDragController;
-    private View mQsbContainer;
 
     public View mWeightWatcher;
 
@@ -441,8 +440,8 @@ public class Launcher extends BaseActivity
         mDefaultKeySsb = new SpannableStringBuilder();
         Selection.setSelection(mDefaultKeySsb, 0);
 
-        if (PackageManagerHelper.isAppEnabled(getPackageManager(), "com.google.android.googlequicksearchbox"))
-            mLauncherTab = new LauncherTab(this);
+//        if (PackageManagerHelper.isAppEnabled(getPackageManager(), "com.google.android.googlequicksearchbox"))
+//            mLauncherTab = new LauncherTab(this);
 
         mRotationEnabled = getResources().getBoolean(R.bool.allow_rotation);
         // In case we are on a device with locked rotation, we should look at preferences to check
@@ -1316,8 +1315,6 @@ public class Launcher extends BaseActivity
         mDragLayer = (DragLayer) findViewById(R.id.drag_layer);
         mFocusHandler = mDragLayer.getFocusIndicatorHelper();
         mWorkspace = (Workspace) mDragLayer.findViewById(R.id.workspace);
-        mQsbContainer = mDragLayer.findViewById(mDeviceProfile.isVerticalBarLayout()
-                ? R.id.workspace_blocked_row : R.id.qsb_container);
         mWorkspace.initParentViews(mDragLayer);
 
         mLauncherView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -1697,7 +1694,7 @@ public class Launcher extends BaseActivity
     }
 
     public View getQsbContainer() {
-        return mQsbContainer;
+        return null;
     }
 
     public Hotseat getHotseat() {
@@ -3730,12 +3727,12 @@ public class Launcher extends BaseActivity
         InstallShortcutReceiver.disableAndFlushInstallQueue(this);
 
         if (Utilities.ATLEAST_MARSHMALLOW) {
-            boolean hasNotificationAccess = false;
-            for (String packageName : NotificationManagerCompat.getEnabledListenerPackages(this)) {
-                hasNotificationAccess |= packageName.equals(getApplicationContext().getPackageName());
-            }
-            if (!hasNotificationAccess)
-                startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+//            boolean hasNotificationAccess = false;
+//            for (String packageName : NotificationManagerCompat.getEnabledListenerPackages(this)) {
+//                hasNotificationAccess |= packageName.equals(getApplicationContext().getPackageName());
+//            }
+//            if (!hasNotificationAccess)
+//                startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
         }
 
         NotificationListener.setNotificationsChangedListener(mPopupDataProvider);
