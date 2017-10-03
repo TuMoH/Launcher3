@@ -50,6 +50,11 @@ android {
             manifest.srcFile "AndroidManifest.xml"
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 repositories {
